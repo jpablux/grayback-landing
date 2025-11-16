@@ -144,6 +144,14 @@ body{
 	max-width: 1300px;
 }
 
+.iframe-ratio-killer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
 .container,
 .container-fluid,
 .container-lg,
@@ -866,6 +874,35 @@ header.main-header .header-sticky.active{
     width: 100%;
     height: 100%;
     z-index: 1;
+}
+
+.hero-bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.hero-video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-video-wrapper iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400%;  /* extra zoom para evitar bordes negros */
+    height: 120%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    pointer-events: none; /* Evita clicks por encima del video */
 }
 
 .hero.hero-bg-image.hero-video .hero-bg-video{
@@ -6925,4 +6962,35 @@ header.main-header .header-sticky.active{
 	.error-page-image img{
 		max-width: 80%;
 	}
+
+    /* MOBILE HERO VIDEO FIX */
+@media (max-width: 768px) {
+    .hero,
+    .hero.hero-bg-image,
+    .hero.hero-bg-image.hero-video {
+        padding: 0 !important;     /* Remove large padding */
+        height: 100vh !important;  /* Force the hero to match screen height */
+        min-height: 100vh !important;
+        display: flex;
+        align-items: center;       /* Center hero content */
+    }
+
+    .hero-content {
+        padding: 20px;
+        z-index: 2;
+        position: relative;
+    }
+
+    /* Make sure the overlay stays correct */
+    .hero.hero-bg-image::before {
+        opacity: 0.85;
+    }
+}
+
+@media (min-width: 769px) {
+    .hero.hero-bg-image.hero-video {
+        padding: 250px 0 140px;
+    }
+}
+
 }
